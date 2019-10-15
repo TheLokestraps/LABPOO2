@@ -7,7 +7,8 @@ package JFrames;
 
 import javax.swing.JOptionPane;
 import Blackboard.Curso;
-import labpoo.datos;
+import labpoo.*;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -19,6 +20,7 @@ public class EditarCurso extends javax.swing.JFrame {
      * Creates new form EditarCurso
      */
     Curso curso;
+    private int Aux  = -1;
     public EditarCurso() {
         initComponents();
         lst_grupos.removeAll();
@@ -87,6 +89,11 @@ public class EditarCurso extends javax.swing.JFrame {
         btn_eliminarGrupo.setForeground(new java.awt.Color(255, 255, 255));
         btn_eliminarGrupo.setText("Eliminar");
         btn_eliminarGrupo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_eliminarGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarGrupoActionPerformed(evt);
+            }
+        });
 
         lst_grupos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -256,17 +263,19 @@ public class EditarCurso extends javax.swing.JFrame {
                i++;
            }
             if ((i<datos.cursos.size())) {
-                Curso curso = datos.cursos.get(i);
+                Curso elcurso = datos.cursos.get(i);
                 JOptionPane.showMessageDialog(rootPane, "Se encontro el curso");
+                Aux = i;
                 habilitarComponentes(true);
-                txt_nombre.setText(curso.Nombre);
-                spn_horas.setValue(curso.horas);
-                spn_creditos.setValue(curso.Creditos);
+                txt_nombre.setText(elcurso.Nombre);
+                spn_horas.setValue(elcurso.horas);
+                spn_creditos.setValue(elcurso.Creditos);
                 int j = 0;
-                while(j<curso.grupos.size()){
-                   //lst_grupos.add(("nrc"+curso.grupos.get(i).Nrc), curso.grupos.get(i));
-                   lst_grupos.add(("nrc"+curso.grupos.get(i).Nrc),this);
+                DefaultListModel model = new DefaultListModel();
+                for (Grupo s : elcurso.grupos){
+                    model.addElement("NRC "+s.Nrc);
                 }
+                lst_grupos.setModel(model);
                 
             }else{
                 JOptionPane.showMessageDialog(rootPane, "No se encontro el curso");
@@ -288,6 +297,13 @@ public class EditarCurso extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btn_editarGrupoActionPerformed
+
+    private void btn_eliminarGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarGrupoActionPerformed
+        if(Aux != -1){
+            datos.cursos.remove(Aux);
+            Aux = -1;
+        }
+    }//GEN-LAST:event_btn_eliminarGrupoActionPerformed
 
     public void habilitarComponentes(boolean activar){
     
