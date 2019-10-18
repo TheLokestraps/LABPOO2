@@ -306,7 +306,7 @@ public class EditarCurso extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_eliminarGrupoActionPerformed
 
-    public void habilitarComponentes(boolean activar){
+    private void habilitarComponentes(boolean activar){
     
         txt_nombre.setEnabled(activar);
         btn_eliminarCurso.setEnabled(activar);

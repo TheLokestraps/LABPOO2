@@ -202,7 +202,7 @@ public class RegistrarPersona extends javax.swing.JFrame {
             String apellido = txt_apellido.getText();
             String contraseña = txt_contraseña.getText();
             String reContraseña = txt_reContraseña.getText();
-            String email = nombre + apellido + String.valueOf((int) Math.random());
+            String email = nombre.toLowerCase().trim() + apellido.toLowerCase().trim() + String.valueOf((int) Math.random());
             
             txt_nombre.setText("");
             txt_apellido.setText("");
