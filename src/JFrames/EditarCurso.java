@@ -303,6 +303,7 @@ public class EditarCurso extends javax.swing.JFrame {
             datos.cursos.remove(Aux);
             Aux = -1;
         }
+        this.dispose();
     }//GEN-LAST:event_btn_eliminarGrupoActionPerformed
 
     public void habilitarComponentes(boolean activar){

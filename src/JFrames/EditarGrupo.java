@@ -7,6 +7,7 @@ package JFrames;
 
 import javax.swing.JOptionPane;
 import labpoo.Grupo;
+import labpoo.datos;
 
 /**
  *
@@ -22,11 +23,12 @@ public class EditarGrupo extends javax.swing.JFrame {
     }
     
     Grupo grupo;
+    int Aux = -1;
 
     public EditarGrupo(Grupo grupo) {
         this.grupo = grupo;
         initComponents();
-        txt_nombre.setText(""+grupo.Nrc);
+        txt_año.setText(""+grupo.Nrc);
 
     }
     
@@ -43,15 +45,17 @@ public class EditarGrupo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txt_nombre = new javax.swing.JTextField();
+        txt_año = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txt_año = new javax.swing.JTextField();
-        txt_semestre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        spn_estudiantes = new javax.swing.JSpinner();
         btn_guardar = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
+        btn_guardar1 = new javax.swing.JButton();
+        txt_semestre = new javax.swing.JTextField();
+        txt_codigo = new javax.swing.JTextField();
+        txt_estu = new javax.swing.JTextField();
+        btn_eliminar = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -60,9 +64,14 @@ public class EditarGrupo extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setText("Codigo");
+        jLabel2.setText("NRC");
 
-        txt_nombre.setEnabled(false);
+        txt_año.setEnabled(false);
+        txt_año.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_añoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Año:");
 
@@ -90,6 +99,30 @@ public class EditarGrupo extends javax.swing.JFrame {
             }
         });
 
+        btn_guardar1.setBackground(new java.awt.Color(0, 0, 0));
+        btn_guardar1.setForeground(new java.awt.Color(255, 255, 255));
+        btn_guardar1.setText("Buscar Codigo");
+        btn_guardar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_guardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardar1ActionPerformed(evt);
+            }
+        });
+
+        txt_semestre.setEnabled(false);
+
+        txt_estu.setEnabled(false);
+
+        btn_eliminar.setBackground(new java.awt.Color(0, 0, 0));
+        btn_eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_eliminar.setText("Eliminar");
+        btn_eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,25 +130,30 @@ public class EditarGrupo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_guardar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_semestre))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_año)
-                            .addComponent(txt_nombre)))
+                    .addComponent(btn_salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_semestre, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(93, 93, 93)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_año)
+                                    .addComponent(txt_codigo))))
+                        .addGap(22, 22, 22))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spn_estudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btn_salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txt_estu, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 22, Short.MAX_VALUE))
+                    .addComponent(btn_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -124,7 +162,7 @@ public class EditarGrupo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -133,13 +171,17 @@ public class EditarGrupo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_semestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(spn_estudiantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txt_estu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_guardar1)
+                .addGap(18, 18, 18)
+                .addComponent(btn_eliminar)
+                .addGap(18, 18, 18)
                 .addComponent(btn_guardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btn_salir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -148,7 +190,10 @@ public class EditarGrupo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,15 +209,53 @@ public class EditarGrupo extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_salirActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        // TODO add your handling code here:
-        String año = txt_año.getText();
-        String semestre = txt_semestre.getText();
-        int maxEstudiantes = Integer.valueOf(spn_estudiantes.getValue().toString());
-        if (!año.isEmpty() && !semestre.isEmpty()) {
-            
+        if(Aux != -1){
+            datos.grupos.get(Aux).año = Integer.parseInt(this.txt_año.getText());
+            datos.grupos.get(Aux).maxEstudiantes = Integer.parseInt(this.txt_estu.getText());
+            datos.grupos.get(Aux).semestre = Integer.parseInt(this.txt_semestre.getText());
+            JOptionPane.showMessageDialog(rootPane, "Grupo modificado con Exito");
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Primero busque el grupo a editar");
         }
-
     }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void txt_añoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_añoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_añoActionPerformed
+
+    private void btn_guardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardar1ActionPerformed
+       String codigo;
+       int i = 0;
+       Grupo g;
+        if (!txt_codigo.getText().isEmpty()) {
+            codigo = txt_codigo.getText();
+            while(i<datos.grupos.size()){
+                g = datos.grupos.get(i);
+                if(g.Nrc.equals(codigo)){
+                    this.txt_año.setText(Integer.toString(g.año));
+                    this.txt_estu.setText(Integer.toString(g.maxEstudiantes));
+                    this.txt_semestre.setText(Integer.toString(g.semestre));
+                  Aux = i;  
+                  this.txt_año.setEnabled(true);
+                  this.txt_estu.setEnabled(true);
+                  this.txt_semestre.setEnabled(true);
+                    
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_guardar1ActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        if(Aux != -1){
+            datos.grupos.remove(Aux);
+            Aux = -1;
+            JOptionPane.showMessageDialog(rootPane, "Grupo eliminado con exito");
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Primero busque el grupo a eliminar");
+        }
+        this.dispose();
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,7 +294,9 @@ public class EditarGrupo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_guardar;
+    private javax.swing.JButton btn_guardar1;
     private javax.swing.JButton btn_salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -219,9 +304,9 @@ public class EditarGrupo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner spn_estudiantes;
     private javax.swing.JTextField txt_año;
-    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_codigo;
+    private javax.swing.JTextField txt_estu;
     private javax.swing.JTextField txt_semestre;
     // End of variables declaration//GEN-END:variables
 }
