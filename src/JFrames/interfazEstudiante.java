@@ -6,6 +6,7 @@
 package JFrames;
 
 import Usuarios.Estudiante;
+import javax.swing.JOptionPane;
 import labpoo.datos;
 
 /**
@@ -24,6 +25,7 @@ public class interfazEstudiante extends javax.swing.JFrame {
 
     public interfazEstudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
+        initComponents();
     }
     
 
@@ -42,6 +44,7 @@ public class interfazEstudiante extends javax.swing.JFrame {
         btn_salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -53,6 +56,11 @@ public class interfazEstudiante extends javax.swing.JFrame {
         });
 
         btn_eliminar.setText("Eliminar Cuenta");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
 
         btn_salir.setText("Salir");
 
@@ -101,6 +109,17 @@ public class interfazEstudiante extends javax.swing.JFrame {
         edit.setVisible(true);
         
     }//GEN-LAST:event_btn_editarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        int indP = estudiante.indicePersona();
+        int indC = estudiante.indiceCargo();
+        datos.estudiantes.remove(indC);
+        datos.personas.remove(indP);
+        JOptionPane.showMessageDialog(rootPane, "Hasta la proximaaaaaaaa");
+        this.dispose();
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
